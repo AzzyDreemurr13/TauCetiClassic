@@ -30,9 +30,6 @@
 		to_chat(usr, "<span class='warning'>It is forbidden to edit this object's variables.</span>")
 		return
 
-	if(istype(O, /datum/controller) && !check_rights(R_DEBUG))
-		return
-
 	var/list/names = list()
 	for (var/V in O.vars)
 		names += V
