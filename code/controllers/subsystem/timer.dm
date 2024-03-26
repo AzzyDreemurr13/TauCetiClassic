@@ -50,6 +50,13 @@ SUBSYSTEM_DEF(timer)
 				callBack.InvokeAsync()
 				qdel(ctime_timer)
 
+			if(ctime_timer.flags & TIMER_LOOP)
+				ctime_timer.spent = 0
+				ctime_timer.timeToRun = REALTIMEOFDAY + ctime_timer.wait
+				BINARY_INSERT(ctime_timer, clienttime_timers, datum/timedevent, timeToRun)
+			else
+				qdel(ctime_timer)
+
 			if (MC_TICK_CHECK)
 				return
 

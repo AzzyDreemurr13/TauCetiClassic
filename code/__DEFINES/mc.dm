@@ -101,3 +101,6 @@
 ///
 ///To be used with TIMER_UNIQUE
 #define TIMER_NO_HASH_WAIT (1<<4)
+//Loops the timer repeatedly until qdeleted
+//In most cases you want a subsystem instead
+#define TIMER_LOOP	(1<<5)

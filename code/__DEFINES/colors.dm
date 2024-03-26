@@ -77,6 +77,7 @@
 #define COLOR_ADAMANTINE                "#269999"
 #define COLOR_HALF_TRANSPARENT_BLACK    "#0000007A"
 
+
 #define	PIPE_COLOR_GREY		"#ffffff"	// yes white is grey
 #define	PIPE_COLOR_RED		"#ff0000"
 #define	PIPE_COLOR_BLUE		"#0000ff"
@@ -99,6 +100,12 @@
 #define LIGHT_COLOR_PLASMA_OC    "#e88893" // Used in plasma gun overcharge mode. rgb(232, 136, 147)
 #define LIGHT_COLOR_LIGHTNING	 "#5eacb6" // Used in lightning bolt projectiles
 #define LIGHT_COLOR_NUKE_OPS      "#00f397" // Used in nuclear operatives related things
+#define LIGHT_COLOR_HALOGEN    "#F0FAFA" //Barely visible cyan-ish hue, as the doctor prescribed. rgb(240, 250, 250)
+#define LIGHT_COLOR_CYAN       "#7DE1E1" //Diluted cyan. rgb(125, 225, 225)
+#define LIGHT_COLOR_ORANGE     "#FA9632" //Mostly pure orange. rgb(250, 150, 50)
+#define LIGHT_COLOR_PURPLE     "#952CF4" //Light Purple. rgb(149, 44, 244)
+#define LIGHT_COLOR_PINK       "#E17DE1" //Diluted, mid-warmth pink. rgb(225, 125, 225)
+#define LIGHT_COLOR_GREEN      "#64C864" //Bright but quickly dissipating neon green. rgb(100, 200, 100)
 
 //Human organ color mods
 #define HULK_SKIN_TONE rgb(48, 224, 40) // human

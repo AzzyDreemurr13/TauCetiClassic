@@ -811,6 +811,7 @@
 #include "code\game\machinery\floodlight.dm"
 #include "code\game\machinery\hologram.dm"
 #include "code\game\machinery\holosign.dm"
+#include "code\game\machinery\holoposter.dm"
 #include "code\game\machinery\hydroponics.dm"
 #include "code\game\machinery\icecream_vat.dm"
 #include "code\game\machinery\IDpainter.dm"

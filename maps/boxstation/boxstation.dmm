@@ -86345,6 +86345,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/station/maintenance/incinerator)
+"wwG" = (
+/obj/machinery/holoposter,
+/turf/simulated/wall/r_wall,
+/area/station/ai_monitored/eva)
 "wxr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -114304,7 +114308,7 @@ aCu
 aCv
 aCv
 aCv
-aCu
+wwG
 aPE
 aKx
 bbo
