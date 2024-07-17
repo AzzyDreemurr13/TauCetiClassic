@@ -457,6 +457,7 @@ ADD_TO_GLOBAL_LIST(/obj/item/weapon/reagent_containers/spray/cleaner, cleaners_l
 			R.cell.use(amount_per_transfer_from_this)
 	if(reagents.total_volume < reagents.maximum_volume)
 		START_PROCESSING(SSobj, src)
+		ADD_TRAIT(src, TRAIT_CYBORG_ITEM, CYBORG_TRAIT)
 
 /obj/item/weapon/reagent_containers/spray/cleaner/cyborg/process()
 	if(reagents.total_volume == reagents.maximum_volume)

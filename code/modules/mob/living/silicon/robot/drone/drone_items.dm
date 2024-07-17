@@ -29,7 +29,8 @@
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,
 		/obj/item/weapon/light/tube,
-		/obj/item/weapon/light/bulb
+		/obj/item/weapon/light/bulb,
+		/obj/item/device/analyzer
 		)
 
 	//Item currently being held.
@@ -185,7 +186,8 @@
 		/obj/item/device/mmi/posibrain,
 		/obj/item/robot_parts,
 		/obj/item/weapon/stock_parts,
-		/obj/item/device/flash
+		/obj/item/device/flash,
+		/obj/item/device/analyzer
 		)
 
 /obj/item/weapon/gripper/medical

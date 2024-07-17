@@ -241,18 +241,19 @@ RCD
 /obj/item/weapon/rcd/tool_start_check(mob/user, amount)
 	return matter >= amount
 
-/obj/item/weapon/rcd/borg/use(amount, mob/user)
+/obj/item/weapon/rcd/cyborg/use(amount, mob/user)
 	if(!isrobot(user))
 		return FALSE
 	return user:cell:use(amount * 30)
 
-/obj/item/weapon/rcd/borg/tool_start_check(mob/user, amount)
+/obj/item/weapon/rcd/cyborg/tool_start_check(mob/user, amount)
 	if(!isrobot(user))
 		return FALSE
 	return user:cell:charge >= (amount * 30)
 
-/obj/item/weapon/rcd/borg/atom_init()
+/obj/item/weapon/rcd/cyborg/atom_init()
 	. = ..()
+	ADD_TRAIT(src, TRAIT_CYBORG_ITEM, CYBORG_TRAIT)
 	desc = "A device used to rapidly build walls/floor."
 	canRwall = 1
 

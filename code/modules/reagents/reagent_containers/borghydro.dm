@@ -27,6 +27,7 @@
 
 /obj/item/weapon/reagent_containers/borghypo/atom_init()
 	. = ..()
+	ADD_TRAIT(src, TRAIT_CYBORG_ITEM, CYBORG_TRAIT)
 	for(var/R in reagent_ids)
 		add_reagent(R)
 
@@ -83,7 +84,7 @@
 	if(!R.total_volume)
 		to_chat(user, "<span class='warning'>The injector is empty.</span>")
 		return
-	if (!istype(M))
+	if (!HAS_TRAIT(M, TRAIT_CYBORG_ITEM))
 		return
 
 	if (R.total_volume && M.try_inject(user, TRUE, TRUE, TRUE))

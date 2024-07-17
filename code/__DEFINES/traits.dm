@@ -255,3 +255,7 @@
 #define TRAIT_ARIBORN_AIRFLOW "trait_ariborn_airflow" // from atmos
 #define TRAIT_ARIBORN_THROWN "trait_ariborn_trown" // if someone thrown it
 //#define TRAIT_ARIBORN_NO_GRAVITY "trait_ariborn_no_gravity" // todo?
+
+//Cyborgs traits
+#define TRAIT_CYBORG_ITEM "cyborg_item"
+#define CYBORG_TRAIT "cyborg_trait"

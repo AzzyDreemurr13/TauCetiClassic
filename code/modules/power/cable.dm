@@ -442,7 +442,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/item/stack/cable_coil/atom_init(mapload, new_amount = null, param_color = null)
 	. = ..()
-
+	ADD_TRAIT(src, TRAIT_CYBORG_ITEM, CYBORG_TRAIT)
 	if(param_color)
 		color = param_color
 
