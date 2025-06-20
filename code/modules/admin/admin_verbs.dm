@@ -73,6 +73,7 @@ var/global/list/admin_verbs_admin = list(
 	/client/proc/toggle_combo_hud, // Toggle all aviables huds, except mining hud,
 	/client/proc/set_bwoink_sound, // affects only the admin that put it there,
 	/client/proc/send_gods_message,
+	/client/proc/metabolism_debug,
 	)
 var/global/list/admin_verbs_log = list(
 	/client/proc/show_player_notes,
@@ -846,11 +847,9 @@ var/global/list/admin_verbs_hideable = list(
 		M.g_skin = hex2num(copytext(new_skin, 4, 6))
 		M.b_skin = hex2num(copytext(new_skin, 6, 8))
 
-	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
-
-	if (new_tone)
-		M.s_tone = max(min(round(text2num(new_tone)), 220), 1)
-		M.s_tone =  -M.s_tone + 35
+	var/new_tone = input("Выберите цвет кожи", "Создание персонажа") in global.skin_tones_by_ru_name
+	var/datum/skin_tone/T = global.skin_tones_by_ru_name[new_tone]
+	M.s_tone = T.name
 
 	var/new_gender = tgui_alert(usr, "Please select gender.", "Character Generation", list("Male", "Female"))
 	if (new_gender)
@@ -869,9 +868,7 @@ var/global/list/admin_verbs_hideable = list(
 	if(new_fstyle)
 		M.f_style = new_fstyle
 
-	M.apply_recolor()
-	M.update_hair()
-	M.update_body()
+	M.update_body(update_preferences = TRUE)
 	M.check_dna(M)
 
 /client/proc/show_player_notes(key as text)
@@ -1252,3 +1249,13 @@ var/global/centcom_barriers_stat = 1
 /obj/structure/centcom_barrier/Destroy()
 	centcom_barrier_list -= src
 	return ..()
+
+/client/proc/metabolism_debug()
+	set category = "Debug"
+	set name = "Debug Metabolism"
+
+	if(!isliving(mob))
+		return
+	
+	var/mob/living/L = mob
+	L.metabolism_debug()

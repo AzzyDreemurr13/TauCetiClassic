@@ -89,6 +89,8 @@ var/global/bridge_secret = null
 	var/use_alien_job_restriction = 0
 	var/list/whitelisted_species_by_time = list()
 
+	var/guest_mode = GUEST_FORBIDDEN
+
 	var/server
 	var/banappeals
 	var/siteurl
@@ -171,12 +173,11 @@ var/global/bridge_secret = null
 	var/gateway_enabled = 0
 	var/ghost_interaction = 0
 
-	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
+	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python3" on unix
 	var/github_token = "" // todo: move this to globals for security
 	var/use_overmap = 0
 
 	var/chat_bridge = 0
-	var/check_randomizer = 0
 
 	var/guard_email = null
 	var/guard_enabled = FALSE
@@ -410,8 +411,8 @@ var/global/bridge_secret = null
 				if ("forumurl")
 					config.forumurl = value
 
-				if ("guest_ban")
-					guests_allowed = 0
+				if ("guest_mode")
+					config.guest_mode = text2num(value)
 
 				if ("usewhitelist")
 					config.usewhitelist = 1
@@ -533,7 +534,7 @@ var/global/bridge_secret = null
 						config.python_path = value
 					else
 						if(world.system_type == UNIX)
-							config.python_path = "/usr/bin/env python2"
+							config.python_path = "/usr/bin/env python3"
 						else //probably windows, if not this should work anyway
 							config.python_path = "python"
 
@@ -597,9 +598,6 @@ var/global/bridge_secret = null
 
 				if("chat_bridge")
 					config.chat_bridge = value
-
-				if("check_randomizer")
-					config.check_randomizer = value
 
 				if("guard_email")
 					config.guard_email = value
