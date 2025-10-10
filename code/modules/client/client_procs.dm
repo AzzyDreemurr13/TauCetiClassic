@@ -207,8 +207,13 @@ var/global/list/blacklisted_builds
 		tdata = params2list(TopicData)
 		TopicData = null //Prevent calls to client.Topic from connect
 
+#ifndef OPENDREAM
 	if(!IsGuestKey(key) && authenticate)
 		hub_authenticated = TRUE
+#else
+	if(!IsGuestKey(key))
+		hub_authenticated = TRUE
+#endif
 
 	// check access token and associated ckey for guest accounts
 	if(IsGuestKey(key))
@@ -248,6 +253,9 @@ var/global/list/blacklisted_builds
 	tgui_panel = new(src)
 
 	global.ahelp_tickets?.ClientLogin(src)
+
+	log_game("[key_name(src)] connected.")
+	message_admins("[ADMIN_LOOKUPJMP(mob)] connected.")
 
 	if(!IsGuestKey(key))
 		update_supporter_status()
@@ -403,6 +411,9 @@ var/global/list/blacklisted_builds
 	clients -= src
 	QDEL_LIST_ASSOC_VAL(char_render_holders)
 	LAZYREMOVE(movingmob?.clients_in_contents, src)
+
+	log_game("[key_name(src)] disconnected.")
+	message_admins("[key_name(src)] [ADMIN_PPJMPFLW(mob)] disconnected.")
 
 	handle_leave()
 
@@ -674,7 +685,7 @@ var/global/list/blacklisted_builds
 /client/proc/update_pixel_ratio(number)
 	window_pixelratio = number
 
-/client/proc/update_dpi()
+/client/proc/update_dpi() // todo: remove me some time after 516
 	set waitfor = FALSE
 
 	dpi = text2num(winget(src, null, "dpi"))
