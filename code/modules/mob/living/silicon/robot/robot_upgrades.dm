@@ -96,6 +96,11 @@
 	R.speed--
 	return TRUE
 
+	if(istype(R.module, /obj/item/weapon/robot_module/сombat))
+		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
+		to_chat(usr, "There's no mounting point for the module!")
+		return FALSE
+
 
 /obj/item/borg/upgrade/tasercooler
 	name = "Borg Rapid Taser Cooling Module"
@@ -106,7 +111,7 @@
 
 
 /obj/item/borg/upgrade/tasercooler/action(mob/living/silicon/robot/R)
-	if(!istype(R.module, /obj/item/weapon/robot_module/security))
+	if(!istype(R.module, /obj/item/weapon/robot_module/security, /obj/item/weapon/robot_module/сombat))
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
 		to_chat(usr, "There's no mounting point for the module!")
 		return FALSE

@@ -366,6 +366,12 @@
 	modules += new /obj/item/borg/combat/shield(src)
 	modules += new /obj/item/borg/combat/mobility(src)
 	modules += new /obj/item/weapon/wrench(src)
+	modules += new /obj/item/weapon/handcuffs/cyborg(src)
+	modules += new /obj/item/weapon/melee/baton(src)
+	modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
+	modules += new /obj/item/taperoll/police(src)
+	modules += new /obj/item/device/gps/cyborg(src)
+	modules += new /obj/item/device/hailer(src)
 	emag = new /obj/item/weapon/gun/energy/lasercannon/cyborg(src)
 
 /obj/item/weapon/robot_module/science

@@ -15,7 +15,7 @@
 	var/used_power_this_tick = 0
 	var/sight_mode = 0
 	var/custom_name = ""
-	var/crisis = FALSE //Admin-settable for combat module use.
+	var/crisis = TRUE //Admin-settable for combat module use.
 	var/datum/wires/robot/wires = null
 
 //Hud stuff
@@ -191,7 +191,7 @@
 		for(var/mod in modules)
 			choose_module[mod] = image(icon = 'icons/mob/robots.dmi', icon_state = modules[mod])
 
-	if(crisis && security_level >= SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
+	if(crisis && can_be_security && security_level >= SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		to_chat(src, "<span class='warning'>Crisis mode active. Combat available.</span>")
 		choose_module["Combat"] = image(icon = 'icons/mob/robots.dmi', icon_state = "droid-combat")
 
@@ -314,6 +314,7 @@
 			module_sprites["Nanotrasen"] = "kerfusNT"
 
 		if("Combat")
+			module_sprites["Combat"] = "droid-combat"
 			build_combat_borg()
 			return
 
@@ -342,6 +343,9 @@
 /mob/living/silicon/robot/proc/build_combat_borg()
 	var/mob/living/silicon/robot/combat/C = new(get_turf(src))
 	module = new /obj/item/weapon/robot_module/combat(src)
+	module.channels = list("Security" = 1)
+	if(camera && ("Robots" in camera.network))
+		camera.add_network("Security")
 	C.key = key
 	qdel(src)
 
