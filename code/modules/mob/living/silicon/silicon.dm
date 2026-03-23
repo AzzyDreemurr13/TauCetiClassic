@@ -148,52 +148,6 @@
 		if (L.name == rem_language)
 			speech_synthesizer_langs -= L
 
-/mob/living/silicon/check_languages()
-	set name = "Check Known Languages"
-	set category = "IC"
-	set src = usr
-
-	var/dat = ""
-
-	for(var/datum/language/L as anything in languages)
-		var/lang_name = L.name
-		var/link_class = ""
-		if(L.name == default_language)
-			link_class = "class='good'"
-
-		if(languages[L] != LANGUAGE_CAN_UNDERSTAND)
-			lang_name = "<a href='byond://?src=\ref[L];usr=\ref[src]'[link_class]>[lang_name]</a>"
-
-		dat += "<b>[lang_name] "
-		for(var/l_key in L.key)
-			dat += "(:[l_key])"
-
-		if(languages[L] != LANGUAGE_CAN_UNDERSTAND)
-			var/sound_macros = ""
-			var/first_macro = TRUE
-			for(var/m_key in L.special_symbols)
-				if(m_key == uppertext(m_key))
-					continue
-				if(!first_macro)
-					sound_macros += ", "
-				first_macro = FALSE
-				sound_macros += "[m_key]"
-
-			if(sound_macros != "")
-				dat += " ([sound_macros])"
-
-		var/remark = ""
-		if(languages[L] == LANGUAGE_CAN_UNDERSTAND)
-			remark += " <i>(can't speak)</i>"
-
-		dat += " </b><br/>[L.desc][remark]<br/><br/>"
-
-	var/datum/browser/popup = new(src, "checklanguage", "Known Languages")
-	popup.set_content(dat)
-	popup.open()
-
-	return
-
 /mob/living/silicon/proc/remove_sensors()
 	for(var/hud in sensor_huds)
 		var/datum/atom_hud/sensor = global.huds[hud]
