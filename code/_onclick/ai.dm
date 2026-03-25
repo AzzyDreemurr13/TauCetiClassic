@@ -40,6 +40,9 @@
 	if(modifiers[SHIFT_CLICK] && modifiers[CTRL_CLICK])
 		CtrlShiftClickOn(A)
 		return
+	if(modifiers[SHIFT_CLICK] && modifiers[ALT_CLICK])
+		AltShiftClickOn(A)
+		return
 	if(modifiers[MIDDLE_CLICK])
 		MiddleClickOn(A)
 		return
@@ -96,6 +99,8 @@
 	A.AIShiftClick(src)
 /mob/living/silicon/ai/CtrlClickOn(atom/A)
 	A.AICtrlClick(src)
+/mob/living/silicon/ai/AltShiftClickOn(atom/A)
+	A.AIAltShiftClick(src)
 /mob/living/silicon/ai/AltClickOn(atom/A)
 	if(active_module)
 		if(!active_module.AIAltClickHandle(A))
@@ -144,7 +149,8 @@
 		Topic("aiDisable=4", list("aiDisable"="4"), 1)
 
 /obj/machinery/power/apc/AICtrlClick() // turns off APCs.
-	Topic("breaker=1", list("breaker"="1"), 0) // 0 meaning no window (consistency! wait...)
+	toggle_breaker() // 1 meaning no window (consistency!)
+	return ..()
 
 /atom/proc/AIAltClick()
 	return
@@ -158,6 +164,15 @@
 		Topic("aiDisable=5", list("aiDisable"="5"), 1)
 	diag_hud_set_electrified()
 	return
+
+/atom/proc/AIAltShiftClick()
+	return
+
+/obj/machinery/door/airlock/AIAltShiftClick() // Emergency access override.
+	if(emergency)
+		Topic("aiDisable=11", list("aiDisable"="11"), 1) // 1 meaning no window (consistency!)
+	else
+		Topic("aiEnable=11", list("aiEnable"="11"), 1)
 
 //
 // Override AdjacentQuick for AltClicking
