@@ -149,8 +149,7 @@
 		Topic("aiDisable=4", list("aiDisable"="4"), 1)
 
 /obj/machinery/power/apc/AICtrlClick() // turns off APCs.
-	toggle_breaker() // 1 meaning no window (consistency!)
-	return ..()
+	Topic("breaker=1", list("breaker"="1"), 0) // 0 meaning no window (consistency! wait...)
 
 /atom/proc/AIAltClick()
 	return
