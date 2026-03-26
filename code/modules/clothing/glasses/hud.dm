@@ -62,6 +62,14 @@
 			enable_hud(glasses_user)
 		addtimer(CALLBACK(src, PROC_REF(fix_hud)), (90 SECONDS) / severity)
 
+/obj/item/clothing/glasses/sunglasses/hud/civil
+	name = "AR Glasses"
+	desc = "A heads-up display that scans the humans in view and provides about their ID status."
+	icon_state = "glasses"
+	item_state_world = "glasses_w"
+	body_parts_covered = 0
+	hud_types = list(DATA_HUD_CIVIL)
+
 /obj/item/clothing/glasses/hud/health
 	name = "health scanner HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."

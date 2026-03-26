@@ -52,6 +52,7 @@
 #define HUD_LIST_LIST 1
 
 //data HUD (medhud, sechud) defines
+#define DATA_HUD_CIVIL          "data_hud_civ"
 #define DATA_HUD_SECURITY       "data_hud_sec"
 #define DATA_HUD_MEDICAL        "data_hud_med"
 #define DATA_HUD_MEDICAL_ADV    "data_hud_med_adv"
