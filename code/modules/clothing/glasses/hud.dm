@@ -62,13 +62,42 @@
 			enable_hud(glasses_user)
 		addtimer(CALLBACK(src, PROC_REF(fix_hud)), (90 SECONDS) / severity)
 
-/obj/item/clothing/glasses/sunglasses/hud/civil
-	name = "AR Glasses"
+/obj/item/clothing/glasses/hud/arglasses
+	name = "AR glasses"
 	desc = "A heads-up display that scans the humans in view and provides about their ID status."
-	icon_state = "glasses"
-	item_state_world = "glasses_w"
+	icon_state = "virtual_glasses-g"
+	item_state = "virtual_glasses-g"
+	item_state_world = "virtual_glasses-g_w"
 	body_parts_covered = 0
 	hud_types = list(DATA_HUD_CIVIL)
+	item_action_types = list(/datum/action/item_action/toggle_glasses_shading)
+	var/shaded = 0
+
+/datum/action/item_action/toggle_glasses_shading
+	name = "Toggle AR Glasses Shading"
+
+/obj/item/clothing/glasses/hud/arglasses/attack_self()
+	toggle()
+
+/obj/item/clothing/glasses/hud/arglasses/verb/toggle()
+	set desc = "Toggle the cosmetic electrochromatic shading of your AR glasses."
+	set category = "Object"
+	set src in usr
+	if(!usr.incapacitated())
+		if(shaded)
+			shaded = !shaded
+			body_parts_covered |= EYES
+			icon_state = "[initial(icon_state)]shaded"
+			item_state_inventory = "[initial(icon_state)]shaded"
+			to_chat(usr, "You darken the electrochromic lenses of \the [src] to one-way transparency.")
+		else
+			shaded = !shaded
+			body_parts_covered &= ~EYES
+			icon_state = initial(icon_state)
+			item_state_inventory = initial(icon_state)
+			to_chat(usr, "You restore the electrochromic lenses of \the [src] to standard two-way transparency.")
+		update_inv_mob()
+		update_item_actions()
 
 /obj/item/clothing/glasses/hud/health
 	name = "health scanner HUD"
