@@ -313,7 +313,7 @@
 /datum/outfit/nanotrasen
 	shoes = /obj/item/clothing/shoes/centcom
 	gloves = /obj/item/clothing/gloves/white
-
+	glasses = /obj/item/clothing/glasses/hud/arglasses/command
 	l_pocket = /obj/item/clothing/glasses/sunglasses
 	r_pocket = /obj/item/device/pda/heads
 	id = /obj/item/weapon/card/id/centcom
@@ -322,6 +322,7 @@
 	name = "NanoTraset: representative"
 
 	uniform = /obj/item/clothing/under/rank/centcom/representative
+	glasses = /obj/item/clothing/glasses/hud/arglasses/command
 	l_ear = /obj/item/device/radio/headset/heads/hop
 	belt = /obj/item/weapon/clipboard
 	id = /obj/item/weapon/card/id/centcom/representative
@@ -330,6 +331,7 @@
 	name = "NanoTraset: officer"
 
 	uniform = /obj/item/clothing/under/rank/centcom/officer
+	glasses = /obj/item/clothing/glasses/hud/arglasses/command
 	l_ear = /obj/item/device/radio/headset/heads/captain
 	head = /obj/item/clothing/head/beret/centcomofficer
 	belt = /obj/item/weapon/gun/energy
@@ -339,6 +341,7 @@
 	name = "NanoTraset: captain"
 
 	uniform = /obj/item/clothing/under/rank/centcom/captain
+	glasses = /obj/item/clothing/glasses/hud/arglasses/command
 	l_ear = /obj/item/device/radio/headset/heads/captain
 	head = /obj/item/clothing/head/beret/centcomcaptain
 	belt = /obj/item/weapon/gun/energy
@@ -469,7 +472,7 @@
 	gloves = /obj/item/clothing/gloves/swat
 	l_ear = /obj/item/device/radio/headset/ert
 	belt = /obj/item/weapon/gun/energy/gun
-	glasses = /obj/item/clothing/glasses/sunglasses
+	glasses = /obj/item/clothing/glasses/hud/arglasses/command
 	back = /obj/item/weapon/storage/backpack/satchel
 
 	id = /obj/item/weapon/card/id/centcom/ert

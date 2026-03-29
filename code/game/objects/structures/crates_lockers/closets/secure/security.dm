@@ -21,6 +21,7 @@
 	else
 		new /obj/item/weapon/gun/energy/gun/head(src)
 
+	new /obj/item/clothing/glasses/hud/arglasses/command(src)
 	new /obj/item/clothing/accessory/armor(src)
 	new /obj/item/clothing/suit/captunic(src)
 	new /obj/item/clothing/suit/captunic/capjacket(src)
@@ -70,7 +71,7 @@
 	new /obj/item/weapon/storage/briefcase/centcomm(src)
 	for(var/i in 1 to 2)
 		new /obj/item/device/radio/headset/headset_int(src)
-		new /obj/item/clothing/glasses/sunglasses/big(src)
+		new /obj/item/clothing/glasses/hud/arglasses(src)
 		new /obj/item/device/flash(src)
 
 /obj/structure/closet/secure_closet/hop
@@ -90,7 +91,7 @@
 		new /obj/item/weapon/gun/energy/gun/head(src)
 
 	new /obj/item/device/remote_device/head_of_personal(src)
-	new /obj/item/clothing/glasses/sunglasses(src)
+	new /obj/item/clothing/glasses/hud/arglasses/command(src)
 	new /obj/item/clothing/suit/armor/vest(src)
 	new /obj/item/clothing/head/helmet(src)
 	new /obj/item/weapon/cartridge/hop(src)

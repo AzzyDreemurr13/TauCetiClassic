@@ -63,8 +63,9 @@
 		addtimer(CALLBACK(src, PROC_REF(fix_hud)), (90 SECONDS) / severity)
 
 /obj/item/clothing/glasses/hud/arglasses
-	name = "AR glasses"
-	desc = "A heads-up display that scans the humans in view and provides about their ID status."
+	name = "AR-С glasses"
+	cases = list("AR-очки серии (C)", "AR-очков серии (C)", "AR-очкам серии (C)", "AR-очки серии (C)", "AR-очками серии (C)", "AR-очках серии (C)")
+	desc = "Очки дополненной реальности, гражданская версия. Имеет интерактивный дисплей, который сканирует находящихся в поле зрения людей и сообщает об их идентификационном статусе."
 	icon_state = "virtual_glasses-g"
 	item_state = "virtual_glasses-g"
 	item_state_world = "virtual_glasses-g_w"
@@ -74,13 +75,13 @@
 	var/shaded = 0
 
 /datum/action/item_action/toggle_glasses_shading
-	name = "Toggle AR Glasses Shading"
+	name = "Активировать затемнение AR-очков"
 
 /obj/item/clothing/glasses/hud/arglasses/attack_self()
 	toggle()
 
 /obj/item/clothing/glasses/hud/arglasses/verb/toggle()
-	set desc = "Toggle the cosmetic electrochromatic shading of your AR glasses."
+	set desc = "Активирует косметическое электрохроматическое затемнение ваших очков дополненной реальности."
 	set category = "Object"
 	set src in usr
 	if(!usr.incapacitated())
@@ -89,13 +90,48 @@
 			body_parts_covered |= EYES
 			icon_state = "[initial(icon_state)]shaded"
 			item_state_inventory = "[initial(icon_state)]shaded"
-			to_chat(usr, "You darken the electrochromic lenses of \the [src] to one-way transparency.")
+			to_chat(usr, "Вы затемняете электрохромные линзы [CASE(src, GENITIVE_CASE)] до односторонней прозрачности.")
 		else
 			shaded = !shaded
 			body_parts_covered &= ~EYES
 			icon_state = initial(icon_state)
 			item_state_inventory = initial(icon_state)
-			to_chat(usr, "You restore the electrochromic lenses of \the [src] to standard two-way transparency.")
+			to_chat(usr, "Вы восстанавливаете двустороннюю прозрачность электрохромных линз [CASE(src, GENITIVE_CASE)].")
+		update_inv_mob()
+		update_item_actions()
+
+/obj/item/clothing/glasses/hud/arglasses/command
+	name = "AR-B glasses"
+	cases = list("AR-очки серии (B)", "AR-очков серии (B)", "AR-очкам серии (B)", "AR-очки серии (B)", "AR-очками серии (B)", "AR-очках серии (B)")
+	desc = "Очки дополненной реальности, предназначенные для Главы Персонала, Капитана станции и Офицеров ЦК. Сенсорный дисплей, сканирует находящихся в поле зрения людей и выдает точные данные об их идентификационном статусе и состоянии здоровья. Также обеспечивает полную защиту от ярких вспышек в активированом режиме."
+	hud_types = list(DATA_HUD_MEDICAL, DATA_HUD_SECURITY)
+	item_action_types = list(/datum/action/item_action/toggle_glasses_shading)
+
+/datum/action/item_action/toggle_glasses_shading
+	name = "Активировать затемнение AR-очков"
+
+/obj/item/clothing/glasses/hud/arglasses/command/attack_self()
+	toggle()
+
+/obj/item/clothing/glasses/hud/arglasses/command/verb/toggle()
+	set desc = "Активирует электрохроматическое затемнение ваших очков дополненной реальности."
+	set category = "Object"
+	set src in usr
+	if(!usr.incapacitated())
+		if(shaded)
+			shaded = !shaded
+			body_parts_covered |= EYES
+			icon_state = "[initial(icon_state)]shaded"
+			item_state_inventory = "[initial(icon_state)]shaded"
+			flash_protection = FLASHES_FULL_PROTECTION
+			to_chat(usr, "Вы затемняете электрохромные линзы [CASE(src, GENITIVE_CASE)] до односторонней прозрачности.")
+		else
+			shaded = !shaded
+			body_parts_covered &= ~EYES
+			icon_state = initial(icon_state)
+			item_state_inventory = initial(icon_state)
+			flash_protection = NONE
+			to_chat(usr, "Вы восстанавливаете двустороннюю прозрачность электрохромных линз [CASE(src, GENITIVE_CASE)].")
 		update_inv_mob()
 		update_item_actions()
 
