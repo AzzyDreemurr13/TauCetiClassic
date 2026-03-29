@@ -111,9 +111,9 @@
 	name = "Активировать затемнение AR-очков"
 
 /obj/item/clothing/glasses/hud/arglasses/command/attack_self()
-	toggle()
+	toggleB()
 
-/obj/item/clothing/glasses/hud/arglasses/command/verb/toggle()
+/obj/item/clothing/glasses/hud/arglasses/command/verb/toggleB()
 	set desc = "Активирует электрохроматическое затемнение ваших очков дополненной реальности."
 	set category = "Object"
 	set src in usr
