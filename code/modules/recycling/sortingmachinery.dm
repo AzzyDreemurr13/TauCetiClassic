@@ -346,16 +346,15 @@
 /obj/item/device/tagger/proc/openwindow(mob/user)
 	var/dat = "<tt>"
 
-	dat += "<table style='width:100%; padding:4px;'><tr>"
-
-	dat += "<center><HR>Режим: <A href='byond://?src=\ref[src];change_mode=1'>[modes[mode]]</A></center><BR>\n"
+	dat += "<center><HR>Переключить режим: <A href='byond://?src=\ref[src];change_mode=1'>[modes[mode]]</A></center><BR>\n"
 
 	switch(modes[mode])
 		if("Метка")
+			dat += "<table style='width:100%; padding:4px;'><tr>"
 			for(var/i = 1, i <= tagger_locations.len, i++)
 				dat += "<td><a href='byond://?src=\ref[src];nextTag=[tagger_locations[i]]'>[tagger_locations[i]]</a></td>"
 
-				if (i%4==0)
+				if (i%3==0)
 					dat += "</tr><tr>"
 
 			dat += "</tr></table><br>Выбрано: [currTag ? currTag : "None"]</tt>"
@@ -373,11 +372,12 @@
 			else
 				dat += "Категория: <A href='byond://?src=\ref[src];category=1'>[lot_category]</A>"
 			dat += " <A href='byond://?src=\ref[src];autocateg=1'>авто</A><BR><BR>\n"
+			dat += "<HR><BR>1. Заполни информацию о предмете.<BR>2. Тыкни по предмету таггером.<BR>3. Без упаковки отправь предмет по пневмопочте.<BR>4. Предмет сам долетит до грузового отсека, упакуется и будет выставлен в '[CARGOSHOPNAME]'."
 		if("Бирка")
 			icon_state = "labeler1"
 			dat += "Текст бирки: <A href='byond://?src=\ref[src];label_text=1'>[label ? label : "Написать"]</A><BR>\n"
 
-	var/datum/browser/popup = new(user, "destTagScreen", "Маркировщик 2.3", 450, 400)
+	var/datum/browser/popup = new(user, "destTagScreen", "Маркировщик 2.3", 500, 500)
 	popup.set_content(dat)
 	popup.open()
 
