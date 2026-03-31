@@ -181,7 +181,6 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/cmd_message_spam_control,
 	/client/proc/investigate_show,
 	/client/proc/reload_admins,
-	/client/proc/reload_mentors,
 	/client/proc/reload_config,
 //	/client/proc/remake_distribution_map,
 //	/client/proc/show_distribution_map,

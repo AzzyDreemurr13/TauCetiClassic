@@ -81,17 +81,6 @@
 	load_admins()
 	feedback_add_details("admin_verb","RLDA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/reload_mentors()
-	set name = "Reload Mentors"
-	set category = "Debug"
-
-	if(!check_rights(R_DEBUG))
-		return
-
-	message_admins("[key_name_admin(usr)] manually reloaded mentors")
-	log_debug("[key_name(usr)] manually reloaded mentors")
-	world.load_mentors()
-
 /client/proc/reload_config()
 	set name = "Reload Configuration"
 	set category = "Debug"

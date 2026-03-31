@@ -43,27 +43,21 @@
 		if(holder)
 			to_chat_admin_pm(src, "<span class='warning'>Error: Admin-PM: Client not found.</span>")
 		return
-	if(src in mentors)
-		message_mentors("[key_name(src, 0, 0, 0)] has started replying to [key_name(C, 0, 0, 0)]'s help request.")
-	message_admins("[key_name_admin(src)] has started replying to [key_name(C, 0, 0)]'s help request.")
-	var/msg = sanitize(input(src,"Message:", "Private message to [key_name(C, 0, 0)]") as text|null)
+
+	var/datum/ticket/T = C.current_ticket
+
+	if(T)
+		message_admins("[key_name_admin(src)] has started replying to [key_name(C, 0, 0)]'s help request.")
+	var/msg = tgui_input_text(src,"Message:", "Private message to [key_name(C, 0, 0)]", multiline = TRUE)
 	if (!msg)
 		message_admins("[key_name_admin(src)] has cancelled their reply to [key_name(C, 0, 0)]'s help request.")
-		if(src in mentors)
-			message_mentors("[key_name(src, 0, 0, 0)] has cancelled their reply to [key_name(C, 0, 0, 0)]'s help request.")
 		return
-	if(reply_type != MHELP_REPLY)
-		cmd_admin_pm(whom, msg)
-	else
-		if(!holder && mob.mind && mob.mind.special_role && !(src in mentors))
-			to_chat_admin_pm(src, "<span class='warning'>You cannot ask mentors for help while being antag. File a ticket instead if you wish question this to admins.</span>")
-			return
-		cmd_mentor_pm(whom, msg)
+	cmd_admin_pm(whom, msg, T)
 
 //takes input from cmd_admin_pm_context, cmd_admin_pm_panel or /client/Topic and sends them a PM.
 //Fetching a message if needed. src is the sender and C is the target client
 
-/client/proc/cmd_admin_pm(whom, msg)
+/client/proc/cmd_admin_pm(whom, msg, datum/ticket/T)
 	if(prefs.muted & MUTE_PM || IS_ON_ADMIN_CD(src, ADMIN_CD_PM))
 		to_chat_admin_pm(src, "<span class='warning'>Error: Private-Message: You are unable to use PM-s (muted).</span>")
 		return
@@ -124,7 +118,7 @@
 		else		//recipient is an admin but sender is not
 			if(!current_ticket)
 				to_chat_admin_pm(src, "<span class='warning'>You can no longer reply to this ticket, please open another one by using the Adminhelp verb if need be.</span>")
-				
+
 				to_chat_admin_pm(src, "<span class='notice'>Message: [msg]</span>")
 				return
 			else
@@ -141,7 +135,7 @@
 	else
 		if(holder)	//sender is an admin but recipient is not. Do BIG RED TEXT
 			if(!recipient.current_ticket)
-				new /datum/admin_help(msg, recipient, TRUE)
+				new /datum/ticket(msg, recipient, TRUE, 1)
 
 			var/recipmsg = "<span class='warning' size='4'><b>-- Administrator private message --</b></span><br>" + \
 				"<span class='warning'>Admin PM from-<b>[key_name(src, recipient, 0)]</b>: <span class='emojify linkify'>[msg]</span></span><br>" + \
