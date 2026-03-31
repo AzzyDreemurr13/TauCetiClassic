@@ -256,7 +256,7 @@ var/global/datum/admin_help_tickets/ahelp_tickets
 	if(!ref_src)
 		ref_src = "\ref[src]"
 	. = " (<A href='byond://?_src_=holder;ahelp=[ref_src];ahelp_action=reject'>REJT</A>)"
-	. += " (<A href='byond://?_src_=holder;ahelp=[ref_src];ahelp_action=icissue'>IC</A>)"
+	. += " (<A href='byond://?_src_=holder;ahelp=[ref_src];ahelp_action=icissue'>IC HONK</A>)"
 	. += " (<A href='byond://?_src_=holder;ahelp=[ref_src];ahelp_action=close'>CLOSE</A>)"
 	. += " (<A href='byond://?_src_=holder;ahelp=[ref_src];ahelp_action=resolve'>RSLVE</A>)"
 	. += " (<A href='byond://?_src_=holder;ahelp=[ref_src];ahelp_action=handleissue'>HANDLE</A>)"
@@ -381,7 +381,7 @@ var/global/datum/admin_help_tickets/ahelp_tickets
 	if(initiator)
 		giveadminhelpverb(initiator.ckey)
 
-		initiator.mob.playsound_local(null, 'sound/effects/adminhelp.ogg', VOL_NOTIFICATIONS, vary = FALSE, ignore_environment = TRUE)
+		initiator.mob.playsound_local(null, 'sound/items/bikehorn.ogg', VOL_NOTIFICATIONS, vary = FALSE, ignore_environment = TRUE)
 
 		var/msg = "<span class='warning' size='4'><b>- AdminHelp Rejected! -</b></span><br>" + \
 			"<span class='warning'><b>Your admin help was rejected.</b> The adminhelp verb has been returned to you so that you may try again.</span><br>" + \
@@ -405,9 +405,9 @@ var/global/datum/admin_help_tickets/ahelp_tickets
 	if(state != AHELP_ACTIVE)
 		return
 
-	var/msg = "<span class='warning' size='4'><b>- AdminHelp marked as IC issue! -</b></span><br>" + \
-		"<span class='warning'><b>Losing is part of the game!</b></span><br>" + \
-		"<span class='warning'>Your character will frequently die, sometimes without even a possibility of avoiding it. Events will often be out of your control. No matter how good or prepared you are, sometimes you just lose.</span>"
+	var/msg = "<span class='warning' size='4'><b>- AdminHelp marked as Honk issue! -</b></span><br>" + \
+		"<span class='warning'><b>Это полный IC Honk, cry about it.</b></span><br>" + \
+		"<span class='warning'>Вашего персонажа будут часто убивать, иногда даже без возможности избежать этого. Помните главную истину: Проиграл в игре победил на форуме. Проиграл на форуме победил на Github.</span>"
 
 	if(initiator)
 		to_chat_admin_pm(initiator, msg)

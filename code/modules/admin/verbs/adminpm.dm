@@ -124,7 +124,7 @@
 		else		//recipient is an admin but sender is not
 			if(!current_ticket)
 				to_chat_admin_pm(src, "<span class='warning'>You can no longer reply to this ticket, please open another one by using the Adminhelp verb if need be.</span>")
-				
+
 				to_chat_admin_pm(src, "<span class='notice'>Message: [msg]</span>")
 				return
 			else
@@ -152,7 +152,7 @@
 			admin_ticket_log(recipient, "<font color='blue'>PM From [key_name_admin(src)]: [msg]</font>")
 
 			//always play non-admin recipients the adminhelp sound
-			recipient.mob.playsound_local(null, 'sound/effects/adminhelp.ogg', VOL_NOTIFICATIONS, vary = FALSE, ignore_environment = TRUE)
+			recipient.mob.playsound_local(null, 'sound/items/bikehorn.ogg', VOL_NOTIFICATIONS, vary = FALSE, ignore_environment = TRUE)
 
 		else		//neither are admins
 			to_chat_admin_pm(src, "<span class='notice'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</span>")

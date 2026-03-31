@@ -113,7 +113,7 @@
 
 	var/list/topiclimiter
 
-	var/bwoink_sound = 'sound/effects/adminhelp.ogg'
+	var/bwoink_sound = 'sound/items/bikehorn.ogg'
 
 	// Last world.time that the player tried to request their resources.
 	var/last_ui_resource_send = 0

@@ -50,7 +50,7 @@
 	admin_ticket_log(target, "<font color='blue'>PM From [BRIDGE_FROM_SNIPPET_TEXT]: [message]</font>")
 
 	if(!target.holder)
-		target.mob.playsound_local(null, 'sound/effects/adminhelp.ogg', VOL_NOTIFICATIONS, vary = FALSE, ignore_environment = TRUE)
+		target.mob.playsound_local(null, 'sound/effects/scary_honk.ogg', VOL_NOTIFICATIONS, vary = FALSE, ignore_environment = TRUE)
 
 	log_admin_private("[BRIDGE_FROM_SNIPPET_TEXT]->[key_name(target)]: [message]")
 	to_chat((global.admins-target), "<font color='blue'><B>PM: [BRIDGE_FROM_SNIPPET_TEXT]-&gt;[key_name(target, 1, 0)]:</B> <span class='emojify linkify'>[message]</span></font>" )
