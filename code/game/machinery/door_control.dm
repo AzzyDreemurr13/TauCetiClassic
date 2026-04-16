@@ -344,6 +344,11 @@
 		INVOKE_ASYNC(src, PROC_REF(toggle_door), door)
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon)), 15)
 
+/obj/machinery/door_control/attack_ghost(mob/user)
+	if(user.client && user.client.AI_Interact)
+		return src.attack_hand(user)
+	return ..()
+
 /obj/machinery/door_control/proc/toggle_door(obj/machinery/door/D)
 	if(istype(D, /obj/machinery/door/airlock))
 		toggle_airlock(D)
