@@ -43,8 +43,8 @@ export async function processIssueLabelsAndBody({ github, context, core }) {
   console.log('Labels to add:', uniqueLabels);
 
   if (foundCheckboxesSection && uniqueLabels.length === 0) {
-    uniqueLabels.push('🔸 Другое');
-    console.log('No specific labels selected, adding "🔸 Другое"');
+    uniqueLabels.push('Другое 🔸');
+    console.log('No specific labels selected, adding "Другое 🔸"');
   }
 
   if (uniqueLabels.length > 0) {
