@@ -10,9 +10,10 @@ export async function processIssueLabelsAndBody({ github, context, core }) {
   let sectionToRemove = '';
 
   const scopeMap = {
-    '🧱 Код': '🧱 Код',
-    '🎨 Спрайты': '🎨 Спрайты',
-    '🗺 Карты': '🗺 Маппинг'
+    'Код 👨‍💻': 'Code',
+    'Спрайты 🎨': 'Sprites',
+    'Карты 🗺️': 'Map Issue',
+    'Перевод/Описание 🧠': 'Translation/Localization'
   };
 
   if (body) {
