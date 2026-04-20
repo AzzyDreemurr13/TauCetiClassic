@@ -12,10 +12,7 @@
 		"performance": "Performance",
 		"balance": "Balance",
 		"experiment": "Experimental",
-		"spellcheck": [
-			"Fix",
-			"Translation/Localization"
-		],
+		"spellcheck": "",
 		"tweak": "Tweak",
 		"sound": "Sound",
 		"image": "Sprites",
