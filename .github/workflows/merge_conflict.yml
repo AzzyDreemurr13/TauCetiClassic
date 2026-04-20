@@ -16,12 +16,6 @@ jobs:
       pull-requests: write # required to apply labels to PRs
     runs-on: ubuntu-latest
     steps:
-      - name: Check for conflicting PRs
-        uses: eps1lon/actions-label-merge-conflict@v3
-        with:
-          dirtyLabel: "Merge Conflict"
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          commentOnDirty: "Pull Request содержит конфликты. Устраните их, чтобы мы смогли оценить и принять запрос."
       - name: Apply labels based on changed files
         if: github.event_name != 'push'
         uses: actions/labeler@v5
