@@ -1,7 +1,5 @@
 name: "Pull Request Labeler"
 
-permissions:
-  contents: read
 
 on:
   push:
@@ -17,9 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Apply labels based on changed files
-        if: github.event_name != 'push'
-        uses: actions/labeler@v5
+        uses: actions/labeler@v6
         with:
-          repo-token: "${{ secrets.TOKEN || secrets.GITHUB_TOKEN }}"
           sync-labels: true
           configuration-path: .github/LABELER.yml

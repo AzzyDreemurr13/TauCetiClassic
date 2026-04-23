@@ -82,7 +82,6 @@
     - '.codebeatsettings'
     - '.editorconfig'
     - '.git*'
-    - 'biome.json'
     - 'libmysql.dll'
     - 'LICENSE'
     - 'README.md'
