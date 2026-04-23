@@ -239,6 +239,17 @@ var/global/datum/admin_help_tickets/ahelp_tickets
 		)
 	_interactions += "[time_stamp()]: [formatted_message]"
 
+	if(usr && usr.ckey == initiator_ckey)
+		var/list/adm = get_admin_counts(R_BAN)
+		var/list/activemins = adm["present"]
+		if(activemins.len <= 0) // If there are still no active admins in the game
+			world.send2bridge(
+				type = list(BRIDGE_ADMINLOG),
+				attachment_title = "Response to **Ticket #[id]** from **[initiator_key_name]**",
+				attachment_msg = formatted_message,
+				attachment_color = BRIDGE_COLOR_ADMINALERT,
+			)
+
 //Adds a cooldown to the user's ahelp verb.
 /datum/admin_help/proc/TimeoutVerb()
 	ahelp_tickets.ckey_cooldown_holder[initiator_ckey] = world.time + 2 MINUTES //2 minute cooldown of admin helps
