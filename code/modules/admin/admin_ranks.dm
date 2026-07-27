@@ -47,6 +47,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 				if("spawn","create")			rights |= R_SPAWN
 				if("event")						rights |= R_EVENT
 				if("log")						rights |= R_LOG
+				if("mentor")					rights |= R_MENTOR
 
 		admin_ranks[rank] = rights
 		previous_rights = rights

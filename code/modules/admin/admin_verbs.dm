@@ -317,7 +317,7 @@ var/global/list/admin_verbs_hideable = list(
 	)
 
 /client/proc/add_admin_verbs()
-	if(holder)
+	if(R_HOLDER)
 		verbs += admin_verbs_default
 		if(holder.rights & R_BUILDMODE)
 			verbs += /client/proc/togglebuildmodeself
@@ -440,7 +440,7 @@ var/global/list/admin_verbs_hideable = list(
 	set name = "Invisimin"
 	set category = "Admin"
 	set desc = "Toggles ghost-like invisibility (Don't abuse this)"
-	if(holder && mob)
+	if(check_rights(R_HOLDER) && mob)
 		if(mob.invisibility == INVISIBILITY_OBSERVER)
 			mob.invisibility = initial(mob.invisibility)
 			to_chat(mob, "<span class='warning'><b>Invisimin off. Invisibility reset.</b></span>")
@@ -454,7 +454,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/player_panel()
 	set name = "Player Panel"
 	set category = "Admin"
-	if(holder)
+	if(check_rights(R_HOLDER))
 		holder.player_panel_old()
 	feedback_add_details("admin_verb","PP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
@@ -462,7 +462,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/player_panel_new()
 	set name = "Player Panel New"
 	set category = "Admin"
-	if(holder)
+	if(check_rights(R_HOLDER))
 		holder.player_panel_new()
 	feedback_add_details("admin_verb","PPN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
@@ -470,7 +470,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/check_antagonists()
 	set name = "Check Antagonists"
 	set category = "Admin"
-	if(holder)
+	if(check_rights(R_HOLDER))
 		holder.check_antagonists()
 		log_admin("[key_name(usr)] checked antagonists.")	//for tsar~
 	feedback_add_details("admin_verb","CHA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -492,7 +492,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/game_panel()
 	set name = "Game Panel"
 	set category = "Admin"
-	if(holder)
+	if(check_rights(R_HOLDER))
 		holder.Game()
 	feedback_add_details("admin_verb","GP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
@@ -500,7 +500,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/secrets()
 	set name = "Secrets"
 	set category = "Admin"
-	if (holder)
+	if (check_rights(R_HOLDER))
 		holder.Secrets()
 	feedback_add_details("admin_verb","S") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
@@ -667,14 +667,14 @@ var/global/list/admin_verbs_hideable = list(
 				holder.effect = effect
 				holder.name = holder.effect.name
 				holder.chance = rand(holder.effect.chance_minm, holder.effect.chance_maxm)
-				D.addeffect(holder)
+				D.addeffect(check_rights(R_HOLDER))
 			if(command == "Remove symptom" && D.effects.len > 0)
 				var/datum/disease2/effectholder/holder = input("Remove symptom", "Select symptom to remove") as null|anything in D.effects
 				if(!holder)
 					continue
 				possible_effects += holder.effect
 				D.effects -= holder
-				qdel(holder)
+				qdel(check_rights(R_HOLDER))
 
 			if(command == "Done")
 				break
@@ -799,7 +799,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/check_ai_laws()
 	set name = "Check AI Laws"
 	set category = "Admin"
-	if(holder)
+	if(check_rights(R_HOLDER))
 		holder.output_ai_laws()
 
 //---- bs12 verbs ----
@@ -807,7 +807,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/mod_panel()
 	set name = "Moderator Panel"
 	set category = "Admin"
-/*	if(holder)
+/*	if(check_rights(R_HOLDER))
 		holder.mod_panel()*/
 //	feedback_add_details("admin_verb","MP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
@@ -882,7 +882,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/free_slot()
 	set name = "Free Job Slot"
 	set category = "Admin"
-	if(holder)
+	if(check_rights(R_HOLDER))
 		var/list/jobs = list()
 		for (var/datum/job/J as anything in SSjob.active_occupations)
 			if (J.current_positions >= J.total_positions && J.total_positions != -1)
@@ -1064,7 +1064,7 @@ var/global/list/admin_verbs_hideable = list(
 	if(!msg)	return
 
 	var/display_name = src.key
-	if(holder && holder.fakekey)
+	if(check_rights(R_HOLDER) && holder.fakekey)
 		display_name = holder.fakekey
 
 	for(var/mob/M in player_list)
@@ -1086,7 +1086,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/admin_crew_salary()
 	set name = "Salary"
 	set category = "Event"
-	if(holder)
+	if(check_rights(R_HOLDER))
 		holder.change_crew_salary()
 	feedback_add_details("admin_verb","Salary") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
@@ -1094,7 +1094,7 @@ var/global/list/admin_verbs_hideable = list(
 /client/proc/change_blobwincount()
 	set name = "Change Blobs to Win"
 	set category = "Event"
-	if(holder)
+	if(check_rights(R_HOLDER))
 		var/datum/faction/blob_conglomerate/conglomerate = find_faction_by_type(/datum/faction/blob_conglomerate)
 		if(!conglomerate)
 			return

@@ -84,5 +84,5 @@
 	for(var/client/X in mentors)
 		if(X == C || X == src)
 			continue
-		if(X.key != key && X.key != C.key && !C.holder && !src.holder)
+		if(X.key != key && X.key != C.key && !C.holder && check_rights(R_HOLDER))
 			to_chat(X, "<B><font color='blue'>PM: [key_name(src, X, 0, 0)]-&gt;[key_name(C, X, 0, 0)]:</B> <span class='emojify linkify'>[msg]</span></font>")//inform X
