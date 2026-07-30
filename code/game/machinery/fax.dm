@@ -254,14 +254,16 @@ var/global/list/alldepartments = list("Central Command")
 	"<a href='byond://?_src_=holder;CentcommFaxViewInfo=\ref[item_info]'>view message</a>") // Some weird BYOND bug doesn't allow to send \ref like `[P.info + P.stamp_text]`.
 
 	for(var/client/C as anything in admins)
-		to_chat(C, msg)
+		if(!is_mentor(C))
+			to_chat(C, msg)
 
 	send_fax(sender, P, "Central Command")
 
 	SSStatistics.add_communication_log(type = "fax-station", author = sender.name, content = item_info)
 
 	for(var/client/X in global.admins)
-		X.mob.playsound_local(null, 'sound/machines/fax_centcomm.ogg', VOL_NOTIFICATIONS, vary = FALSE, frequency = null, ignore_environment = TRUE)
+		if(!is_mentor(X))
+			X.mob.playsound_local(null, 'sound/machines/fax_centcomm.ogg', VOL_NOTIFICATIONS, vary = FALSE, frequency = null, ignore_environment = TRUE)
 
 	world.send2bridge(
 		type = list(BRIDGE_ADMINCOM),

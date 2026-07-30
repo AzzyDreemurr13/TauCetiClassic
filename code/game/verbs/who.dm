@@ -116,15 +116,16 @@
 				extra += " (AFK - [C.inactivity2text()])"
 		if(C.ckey in mentor_ckeys)
 			SW_INCREMENT(SW_MENTORS, C, "Mentor", extra)
-		if(C.holder)
-			if(R_BAN & C.holder.rights)
-				SW_INCREMENT(SW_ADMINS, C, C.holder.rank, extra)
-			else if(R_DEBUG & C.holder.rights)
-				SW_INCREMENT(SW_DEVELOPERS, C, C.holder.rank, extra)
-			else if(R_WHITELIST & C.holder.rights)
-				SW_INCREMENT(SW_XENOVISORS, C, C.holder.rank, extra)
-			else
-				SW_INCREMENT(SW_ADMINS, C, C.holder.rank, extra)
+		else if(C.holder)
+			if(C.holder)
+				if(R_BAN & C.holder.rights)
+					SW_INCREMENT(SW_ADMINS, C, C.holder.rank, extra)
+				else if(R_DEBUG & C.holder.rights)
+					SW_INCREMENT(SW_DEVELOPERS, C, C.holder.rank, extra)
+				else if(R_WHITELIST & C.holder.rights)
+					SW_INCREMENT(SW_XENOVISORS, C, C.holder.rank, extra)
+				else
+					SW_INCREMENT(SW_ADMINS, C, C.holder.rank, extra)
 
 	var/msg
 	for(var/staff in staffwho)

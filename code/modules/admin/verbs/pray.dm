@@ -73,8 +73,9 @@
 			continue
 
 		if(M.client.holder && (M.client.prefs.chat_toggles & CHAT_PRAYER)) // Show the message to admins with prayer toggled on
-			to_chat(M, admin_msg)//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
-			continue
+			if(!is_mentor(M.client))
+				to_chat(M, admin_msg)//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
+				continue
 
 		if(M.stat == DEAD && (M.client.prefs.chat_toggles & CHAT_DEAD))
 			if(M.fake_death) //Our changeling with fake_death status must not hear dead chat!!
@@ -150,7 +151,8 @@
 	)
 	text = "<span class='notice'><b><font color=orange>CENTCOMM[iamessage ? " IA" : ""]:</font>[key_name(Sender, 1)] (<A href='byond://?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A href='byond://?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A href='byond://?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) (<A href='byond://?_src_=holder;adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A href='byond://?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<A href='byond://?_src_=holder;BlueSpaceArtillery=\ref[Sender]'>BSA</A>) (<A href='byond://?_src_=holder;CentcommReply=\ref[Sender]'>RPLY</A>):</b> [text]</span>"
 	for(var/client/C as anything in admins)
-		to_chat(C, text)
+		if(!is_mentor(C))
+			to_chat(C, text)
 
 /proc/Syndicate_announce(text , mob/Sender)
 	world.send2bridge(
@@ -162,4 +164,5 @@
 	)
 	text = "<span class='notice'><b><font color=crimson>SYNDICATE:</font>[key_name(Sender, 1)] (<A href='byond://?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A href='byond://?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A href='byond://?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) (<A href='byond://?_src_=holder;adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A href='byond://?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<A href='byond://?_src_=holder;BlueSpaceArtillery=\ref[Sender]'>BSA</A>) (<A href='byond://?_src_=holder;SyndicateReply=\ref[Sender]'>RPLY</A>):</b> [text]</span>"
 	for(var/client/C as anything in admins)
-		to_chat(C, text)
+		if(!is_mentor(C))
+			to_chat(C, text)

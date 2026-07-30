@@ -121,6 +121,9 @@
 			if(!new_rank || (new_rank in list(ADMIN_RANK_ROUND, ADMIN_RANK_SANDBOX, ADMIN_RANK_REMOVED)))
 				to_chat(usr, "<span class='alert'>Error: Topic 'editrights': Invalid rank</span>")
 				return
+	if(new_rank == "Mentor")
+		rights = R_MENTOR
+
 	if(D)
 		D.disassociate()								//remove adminverbs and unlink from client
 		D.rank = new_rank								//update the rank
@@ -247,10 +250,17 @@ var elements = document.getElementsByName('rights');
 		to_chat(usr, "<span class='alert'>Error: Topic 'editmentorlist': [ment_ckey] is already a mentor.</span>")
 		return
 	if(ment_ckey in admin_datums)
-		remove_admin(ment_ckey)
+		var/datum/admins/old_D = admin_datums[ment_ckey]
+		if(old_D)
+			old_D.disassociate() // Мгновенно забираем старые админские права
+		admin_datums -= ment_ckey // Удаляем из общего списка админов
+
 	mentor_ckeys += ment_ckey
+	mentor_ckeys += ment_ckey
+	var/datum/admins/D = new /datum/admins("Mentor", R_MENTOR, ment_ckey)
 	if(directory[ment_ckey])
 		mentors += directory[ment_ckey]
+		D.associate(directory[ment_ckey])
 	message_admins("[key_name_admin(usr)] added [ment_ckey] to the mentors list")
 	log_admin("[key_name(usr)] added [ment_ckey] to the mentors list")
 
@@ -276,6 +286,11 @@ var elements = document.getElementsByName('rights');
 	if(tgui_alert(usr, "Are you sure you want to remove [ment_ckey] from mentors?","Message", list("Yes","Cancel")) == "Yes")
 		mentor_ckeys -= ment_ckey
 		mentors -= directory[ment_ckey]
+		if(ment_ckey in admin_datums)
+			var/datum/admins/D = admin_datums[ment_ckey]
+			if(D)
+				D.disassociate()
+			admin_datums -= ment_ckey
 		message_admins("[key_name_admin(usr)] removed [ment_ckey] from the mentors list")
 		log_admin("[key_name(usr)] removed [ment_ckey] from the mentors list")
 

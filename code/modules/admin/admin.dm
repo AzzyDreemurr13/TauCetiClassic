@@ -1086,6 +1086,21 @@ var/global/BSACooldown = 0
 	popup.set_content(html)
 	popup.open()
 
+/*
+	helper proc to test if someone is a mentor or not.  Got tired of writing this same check all over the place.
+*/
+/proc/is_mentor(client/C)
+
+	if(!istype(C))
+		return 0
+	if(!C.holder)
+		return 0
+
+	if(C.holder.rights == R_MENTOR)
+		return 1
+	return 0
+
+
 /proc/get_options_bar(whom, detail = 2, name = 0, link = 1, reply = null, mentor_pm = FALSE)
 	if(!whom)
 		return "<b>(*null*)</b>"
